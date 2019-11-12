@@ -5,17 +5,16 @@ def solution(num):
 	if num<2:
 		return 
 	bool_array = [1 for i in range(num+1)] # 创建一个全为ture的数组 【考虑到时间复杂度，true全改为1，false改为0】
-	bool_array[0], bool_array[1] = 0, 0                   # 因为0和1不是质数
+	bool_array[0], bool_array[1] = 0, 0    # 因为0和1不是质数
 	for tmp in range(2, num+1):
-		if bool_array[tmp]==0:            # 如果bool数组的第tmp个位置已经是false，说明它的倍数已经处理过了，直接进入下一个
+		if bool_array[tmp]==0:         # 如果bool数组的第tmp个位置已经是false，说明它的倍数已经处理过了，直接进入下一个
 			continue
-		beishu = 2                            # 用tmp这个数乘以倍数，得到的结果如果小于num，则将bool数组对应的位置转为false
-		# print('当前判断的数字为：', tmp)
+		beishu = 2                     # 用tmp这个数乘以倍数，得到的结果如果小于num，则将bool数组对应的位置转为false
 		while 1:
 			if tmp*beishu>num:
 				break
 			if bool_array[tmp*beishu]==0: # 如果对应位置已经是false了，直接跳过，进入下一次
-				beishu += 1                   # 要不然，在进入循环还是上一个值，会进入死循环
+				beishu += 1           # 要不然，在进入循环还是上一个值，会进入死循环
 				continue
 			bool_array[tmp*beishu] = 0
 			beishu += 1
