@@ -1,6 +1,9 @@
 '''
 输入前序遍历和中序遍历重建二叉树：
 规律：前序遍历的第一个数字总是根节点；中序遍历中根节点的左端为左子树，右端为右子树
+
+思路：先根据前序遍历找到根节点，然后再根据根结点的将中序遍历且分为左右两颗子树，再根据子树的长度切分前序遍历，从而切分出小的先序遍历和
+中序遍历，然后循环以递归的方法解题
 '''
 
 class TreeNode:
@@ -9,13 +12,11 @@ class TreeNode:
         self.leftChild = None
         self.rightChild = None
 
-
 class Solution:
     def reBuildBinaryTree(self, tpre, tin):     # Preorder traversal; In-order traversal
         len_li = len(tpre)
-        if len_li==0:
-            # 返回一颗空树
-            return TreeNode()
+        if len_li==0 or len(tpre)!=len(tin):    # 特例处理：长度为0或者是二者的长度不一样
+            return None
         elif len_li==1:
             return TreeNode(tpre[0])
         else:
