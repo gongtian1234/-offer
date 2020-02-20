@@ -4,35 +4,35 @@
 
 思路：
 先在纸上画一颗满二叉树
-1> 如果该节点有右子树，则下一个节点就是右子树的最左节点(用while寻找右子树的最左节点)；
-2> 如果该节点没有右子树，且其是左子树下的，则下一个节点就是其父节点；
-3> 如果该节点没有右子树，且其是右子树下的，则下一个节点就要一直往上溯源
+1> 情况1：如果该节点有右子树，则下一个节点就是右子树的最左节点(用while寻找右子树的最左节点)；
+2> 情况2：如果该节点没有右子树，且其是左子树下的，则下一个节点就是其父节点；或者其是右子树下的，则下一个节点就要一直往上溯源，否则返回None
 '''
 class TreeLinkNode:
-	def __init__(self, x):
-		self.val = x
-		self.left = None
-		self.right = None
-		self.next = None    # 指向该节点的父节点
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+        self.next = None    # 指向该节点的父节点
 
 
 class Solution:
-	def GetNext(self, pNode):
-		# writing code here
-		if not pNode:    # if True (防止传入空节点)
-			return pNode
+    def GetNext(self, pNode):
+        # writing code here
+        if not pNode:    # if True (防止传入空节点)
+            return pNode
 
-		if pNode.right:  # 右子树不为空
-			pNode = pNode.right
-			while pNode.left:
-				pNode = pNode.left
-			return pNode
-
-		while pNode.next:# 非根节点
-			if pNode==pNode.next.left:
-				return pNode.next
-			pNode = pNode.next
-		return None
+        if pNode.right:  # 右子树不为空
+            tmpNode = pNode.right
+            while tmpNode.left:
+                tmpNode = tmpNode.left
+            return tmpNode
+        else:
+            tmpNode = pNode
+            while tmpNode.next:# 非根节点
+                if tmpNode==tmpNode.next.left:
+                    return tmpNode.next
+                tmpNode = tmpNode.next
+            return None
 
 
 '''
