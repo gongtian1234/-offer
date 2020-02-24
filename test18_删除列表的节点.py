@@ -56,24 +56,24 @@ if __name__ == '__main__':
 
 
 
-# class Solution2:
-#     def deleteDuplication(self, pHead):
-#         ''' 删除链表中的重复节点 '''
-#         if pHead is None or pHead.next is None:
-#             return pHead
-#         bHead = ListNode(pHead.val-1)
-#         bHead.next = pHead
-#         firstNode = bHead
-#         secondHead = pHead
-#         while secondHead is not None and secondHead.next is not None:
-#             if secondHead.val == secondHead.next.val:
-#                 delVal = secondHead.val
-#                 while secondHead is not None and (secondHead.val==delVal):
-#                     secondHead = secondHead.next
-#                 firstNode.next = secondHead
-#             else:
-#                 firstNode = firstNode.next
-#                 secondHead = secondHead.next
-#         return bHead.next
+class Solution2:
+    def deleteDuplication(self, pHead):
+        ''' 删除链表中的重复节点 '''
+        if pHead is None or pHead.next is None:
+            return pHead
+        bHead = ListNode(pHead.val-1)
+        bHead.next = pHead
+        firstNode = bHead
+        secondHead = pHead
+        while secondHead is not None and secondHead.next is not None:
+            if secondHead.val == secondHead.next.val:
+                delVal = secondHead.val
+                while secondHead is not None and (secondHead.val==delVal):
+                    secondHead = secondHead.next
+                firstNode.next = secondHead
+            else:
+                firstNode = firstNode.next
+                secondHead = secondHead.next
+        return bHead.next
 
 
