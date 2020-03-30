@@ -38,7 +38,7 @@ def getKListNums(tinput, k):
                 rightChildIndex = 2*index + 2
                 # 可能没有右孩，可能左右孩都没有，可能都有
                 if rightChildIndex<MaxHeapLen:    # 左右子孩都有
-                    if MaxHeap[index]<MaxHeap[rightChildIndex]:
+                    if MaxHeap[leftChildIndex]<=MaxHeap[rightChildIndex] and MaxHeap[index]<MaxHeap[rightChildIndex]:
                         MaxHeap[index], MaxHeap[rightChildIndex] = MaxHeap[rightChildIndex], MaxHeap[index]
                         index = rightChildIndex
                     elif MaxHeap[index]<MaxHeap[leftChildIndex]:
