@@ -54,6 +54,13 @@
 改进：不选择第一个数，每次都选择中间那个数
 '''
 
+'''
+堆排序：
+基本原理就是创建堆、调整堆和堆排序。但是展开分析及写代码的时候就不是这么轻松了，还是有点晦涩。
+因为传入的是一个数组（列表），所以代码中不需要创建堆，仅需调整堆和堆排序即可。整体框架可以通过两个for循环就可以实现，其中关键点是调整堆函数，
+调整对函数传入的参数是三个：数组，根节点索引，要处理的序列长度，具体还是看代码，有些描述不清楚
+'''
+
 def bubble_sort(array):
     for i in range(len(array)):
         is_sorted = True   # 停止标记
@@ -161,3 +168,31 @@ print('quick sorted:', end=' ')
 qs = QuickSorted()
 print(qs.quick_sorted([9,8,7,6,5,4,3,2,1,2]))
 
+def heapSort(arr):
+    if len(arr)<=1:
+        return arr
+    lenght = len(arr)
+    # 调整堆
+    for i in range(length//2-1, -1, -1):
+        adjustHeap(arr, i, length)
+    # 堆排序
+    for j in range(length-1, 0, -1):
+        arr[0], arr[j] = arr[j], arr[0]  # 每次都把位于堆顶的最大元素放入末尾，然后再调整堆
+        adjustHeap(arr,0,j)
+    return arr
+        
+def adjustHeap(arr, parent_index, length):
+    parent_val = arr[parent_index]
+    tmp_child = 2*parent_index+1
+    while tmp_child<length:
+        if tmp_child+1<length and arr[tmp_child]<arr[tmp_child+1]:
+            tmp_child += 1
+        if arr[parent_index]<arr[tmp_child]:
+            arr[parent_index] = arr[tmp_child]
+            parent_index = tmp_child
+        else:
+            break
+        tmp_child = 2*tmp_child+1
+    arr[parent_index] = parent_val
+    
+print(heapSort([7,6,5,4,3,2,1,99]))
