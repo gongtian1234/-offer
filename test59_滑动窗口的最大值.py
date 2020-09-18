@@ -14,7 +14,7 @@
 def maxInWindows(numbers, k):
     if numbers is None or len(numbers)<k or k<1:
         return []
-    doubleQueue, rst = [], []
+    doubleQueue, rst = [], []  # doubleQueue[0]对应的始终是已经滑动过的窗口中的最大值
     for i in range(len(numbers)):
         if len(doubleQueue)>0 and i-k+1>doubleQueue[0]:                      # 删除超出窗口的数的索引
             doubleQueue.pop(0)
