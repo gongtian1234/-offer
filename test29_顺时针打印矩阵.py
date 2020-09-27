@@ -7,10 +7,36 @@
 打印出的顺序为1 2 3 4 8 12 16 15 14 13 9 5 6 7 11 10
 
 思路：
-用while循环顺时针打印，循环条件row<rows/2 and column<columns/2（如，5*5或6*6的矩阵，结束的左上角点的坐标为(2,2)）。分四次打印，
+方法一：用while循环顺时针打印，循环条件row<rows/2 and column<columns/2（如，5*5或6*6的矩阵，结束的左上角点的坐标为(2,2)）。分四次打印，
 先从左到右，再从上到下，再从右到左，最后从下到上
+方法二：（方法二更简单，而且它的附加知识点是旋转矩阵）
+不断取数组的第一行放入结果列表中，每放一次，就把剩下的数组逆时针旋转90度，以把最后一列变为新数组的第一行，然后接着把第一行pop出来放入结果列表中
+# 参考网址：https://blog.csdn.net/Lynette_bb/article/details/73414119
+# 相关题目：旋转数组，将一个数组旋转90度
 '''
+# 方法二：
+class Solution:
+    def printMatrix(self,arr):
+        if arr is None or len(arr)==0:return arr
+        sum_nums = len(arr)*len(arr[0])
+        rst = []
+        rst.extend(arr[0])
+        while len(rst)<sum_nums:
+            arr.pop(0)
+            arr = self.rotate_reverse(arr)
+            rst.extend(arr[0])
+        return rst
 
+    def rotate_reverse(self, arr):
+        if len(arr)<1: return arr
+        m, n = len(arr), len(arr[0])
+        rotate_rst = [[0]*m for _ in range(n)]
+        for i in range(m):
+            for j in range(n):
+                rotate_rst[j][i] = arr[i][n-1 - j]
+        return rotate_rst
+
+# 方法一
 def printMatrixClockwisely(numbers):
     if numbers is None or numbers==[]:
         return
