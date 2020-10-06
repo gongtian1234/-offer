@@ -23,3 +23,32 @@ def getMaxValue(values, rows, cols):
 
 if __name__ == '__main__':
     print(getMaxValue([7,8,9,4,5,6,1,2,3], 3, 3))
+    
+# 礼物的最大价值及其路径
+## 思路：前半部分一样，先是根据动态规划的方法找到礼物的最大价值矩阵，然后再根据这个矩阵反向找到取得最大价值时的路径
+def maxValueAndPath(rows, columns, lst):
+    if lst is None or rows*columns!=len(lst): return 
+    arr = [[0]*(columns+1) for _ in range(rows+1)]
+    for i in range range(rows+1):
+        for j in range(columns+1):
+            if i==0 or j==0: arr[i][j] = 0
+            else:
+                arr[i][j] = max(arr[i-1][j], arr[i][j-1]) + lst[(i-1)*columns+j-1]
+    max_value = arr[rows][cloumns]
+    path = []
+    if rows==1 or columns==1: path = lst
+    else:
+        path.append(lst[-1])
+        i, j = rows, columns
+        while i>1 and j>1:
+            if arr[i-1][j]>arr[i][j-1]: 
+                path.append(lst[(i-1)*columns - (columns-j) -1])
+                i = i -1
+            else:
+                path.append(lst[(i-1)*columns + (j-1) - 1])
+                j -= 1
+        path.append(lst[0])
+        path = path[::-1]
+    return path, max_value
+                
+        
