@@ -5,6 +5,7 @@
       新的子集，{} + 3 => {3}，现在所有的子集为{}、{3}，再取出2放入所有已有的子集中形成新的子集，形成了{2}、{3,2}，一共就有了4
       子集（这种解法是利用了python的特性）
       2、回溯法(非常重要，死记)。感觉有点绕，不太理解。
+      3、使用两个for循环打印出其所有子集的方法
 '''
 def solution1(nums):
 	tmp = [[]]
@@ -34,3 +35,12 @@ def subsets_recursive_helper(result, lst, nums, pos):
 		# print('now lst is', lst)
 		# print()
 print(solution2(['a','b','c']))
+
+def solution3(s):
+    m = len(s)
+    if m<1:
+	return
+    rst = [[]]
+    for i in range(m):
+	rst += [j+s[i] for j in rst]
+print(solution3(['a','b','c']))
