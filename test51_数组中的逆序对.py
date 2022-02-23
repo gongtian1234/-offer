@@ -18,22 +18,40 @@ class Solution:
         
         # 再按照归并排序合并的方法进行合并，并统计逆序对
         def merge(a,b):
+            '''返回的是一个由小到大排好序的列表'''
+#             c = []
+#             while len(a)>0 and len(b)>0:
+#                 # a:3 4  b:1 2 
+#                 if a[0]<b[0]:
+#                     c.append(a.pop(0)) # pop(0)的时间复杂度为O(n)，因为每次删除后，还要移动内存中的数
+#                     # print(len(a))
+#                 elif b[0]<a[0]:
+#                     c.append(b.pop(0))
+#                     # print(len(b))
+#                     self.count += len(a)    # 如a:[5,7]  b:[4,6]  a[0]>b[0], 应该加的是len(a)，因为a是有序的，a[0]>b[0]，则a中的元素都大于b[0]
+#             if len(a)==0:   # b可能还剩下一个数
+#                 c += b
+#             if len(b)==0:
+#                 c += a
+#             # print('c is ',c)
+#             # print('self.count is ',self.count)
+#             return c
             c = []
-            while len(a)>0 and len(b)>0:
-                # a:3 4  b:1 2 
-                if a[0]<b[0]:
-                    c.append(a.pop(0))
-                    # print(len(a))
-                elif b[0]<a[0]:
-                    c.append(b.pop(0))
-                    # print(len(b))
-                    self.count += len(a)    # 如a:[5,7]  b:[4,6]  a[0]>b[0], 应该加的是len(a)，因为a是有序的，a[0]>b[0]，则a中的元素都大于b[0]
-            if len(a)==0:   # b可能还剩下一个数
-                c += b
-            if len(b)==0:
-                c += a
-            # print('c is ',c)
-            # print('self.count is ',self.count)
+            i,j = 0,0
+            while i<len(a) and j<len(b): # a和b同时不为空
+                # a:[3,4] b:[1,2]
+                if a[i]>b[j]:
+                    c.append(b[j])
+                    j += 1
+                    self.count += len(a)-i
+                elif a[i]<=b[j]:
+                    c.append(a[i])
+                    i += 1
+            # 此时可能a或b为空，所以需要判断
+            if i<len(a):  # len(a)>0
+                c += a[i:]
+            if j<len(b):
+                c += b[j:]
             return c
 
         # 先将数组拆分开
